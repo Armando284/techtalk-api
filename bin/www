@@ -7,19 +7,6 @@ require('dotenv').config()
 const app = require('../app');
 const debug = require('debug')('techtalk-api:server');
 const http = require('http');
-const { Client } = require('pg')
-
-const client = new Client({
-  host: process.env.DB_HOST,
-  port: process.env.DB_PORT,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME
-})
-
-client.connect()
-  .then(() => { console.log('DB connect success!') })
-  .catch((error) => { console.error('DB connect error', error) })
 
 /**
  * Get port from environment and store in Express.
