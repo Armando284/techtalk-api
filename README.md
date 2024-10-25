@@ -42,7 +42,7 @@ npm run migrate
 ## Deployment
 The API is currently deployed on an Express server. For production deployment, ensure the following:
 
-Set the `NODE_ENV` variable to `production`.
+Set the `NODE_ENV` constiable to `production`.
 Use a process manager like `PM2` to keep the server running.
 Ensure you have a secure PostgreSQL instance and update your `DATABASE_URL` in the production environment.
 
