@@ -15,7 +15,6 @@ module.exports = {
 
     return queryInterface.bulkInsert('Users', [
       {
-        id: 1,
         name: 'John Doe',
         email: 'johndoe@example.com',
         password: 'hashedpassword123', // Asegúrate de usar un hash real
@@ -23,7 +22,6 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        id: 2,
         name: 'Jane Doe',
         email: 'janedoe@example.com',
         password: 'hashedpassword456', // Asegúrate de usar un hash real

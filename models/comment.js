@@ -1,41 +1,45 @@
 const { Model, DataTypes } = require('sequelize')
 
 module.exports = (sequelize) => {
-  class Post extends Model {
+  class Comment extends Model {
     static associate(models) {
       this.belongsTo(models.User, { foreignKey: 'userId', as: 'user' })
-      this.hasMany(models.Comment, { foreignKey: 'postId', as: 'posts' })
+      this.belongsTo(models.Post, { foreignKey: 'postId', as: 'post' })
     }
   }
 
-  Post.init({
+  Comment.init({
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
-      autoIncrement: true
-    },
-    title: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    content: {
-      type: DataTypes.TEXT,
-      allowNull: false
+      autoIncrement: true,
     },
     userId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
         model: 'users',
+        key: 'id',
+      }
+    },
+    postId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'posts',
         key: 'id'
       }
-    }
+    },
+    content: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
   }, {
     sequelize,
-    modelName: 'Post',
-    tableName: 'Posts',
+    modelName: 'Comment',
+    tableName: 'Comments',
     timestamps: true
   })
 
-  return Post
+  return Comment
 }

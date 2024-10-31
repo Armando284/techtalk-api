@@ -9,9 +9,10 @@ module.exports = {
      * Example:
      * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
      */
+
     const { DataTypes } = Sequelize
     await this.down(queryInterface, Sequelize);
-    await queryInterface.createTable('Posts', {
+    await queryInterface.createTable('Comments', {
       id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -28,13 +29,19 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       },
-      title: {
-        type: DataTypes.STRING,
+      postId: {
+        type: DataTypes.INTEGER,
         allowNull: false,
+        references: {
+          model: 'Posts',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
       },
       content: {
         type: DataTypes.TEXT,
-        allowNull: false,
+        allowNull: false
       },
       createdAt: {
         type: DataTypes.DATE,
@@ -56,6 +63,6 @@ module.exports = {
      * Example:
      * await queryInterface.dropTable('users');
      */
-    await queryInterface.dropTable('Posts')
+    await queryInterface.dropTable('Comments')
   }
 };
