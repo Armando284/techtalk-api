@@ -7,9 +7,18 @@ module.exports = (sequelize) => {
     async isValidPassword(password) {
       return await bcrypt.compare(password, this.password)
     }
+
+    static associate(models) {
+      this.hasMany(models.Post, { foreignKey: 'userId', as: 'posts' })
+    }
   }
 
   User.init({
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
     name: {
       type: DataTypes.STRING,
       allowNull: false
@@ -25,7 +34,9 @@ module.exports = (sequelize) => {
     }
   }, {
     sequelize,
-    modelName: 'User'
+    modelName: 'User',
+    tableName: 'Users',
+    timestamps: true
   })
 
   User.beforeCreate(async (user) => {

@@ -1,4 +1,4 @@
-const { sequelize } = require('../../users/models');
+const { sequelize } = require('../models');
 
 async function checkDatabaseConnection() {
   try {

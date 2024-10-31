@@ -10,12 +10,13 @@ module.exports = {
      * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
      */
     const { DataTypes } = Sequelize;
+    await queryInterface.dropTable('Users');
     await queryInterface.createTable('Users', {
       id: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
+        type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
+        allowNull: false,
       },
       name: {
         type: DataTypes.STRING,
@@ -31,14 +32,14 @@ module.exports = {
         allowNull: false
       },
       createdAt: {
-        type: Sequelize.DATE,
+        type: DataTypes.DATE,
         allowNull: false,
-        defaultValue: Sequelize.NOW
+        defaultValue: DataTypes.NOW
       },
       updatedAt: {
-        type: Sequelize.DATE,
+        type: DataTypes.DATE,
         allowNull: false,
-        defaultValue: Sequelize.NOW
+        defaultValue: DataTypes.NOW
       }
     })
   },
