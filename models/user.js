@@ -10,6 +10,7 @@ module.exports = (sequelize) => {
 
     static associate(models) {
       this.hasMany(models.Post, { foreignKey: 'userId', as: 'posts' })
+      this.hasMany(models.Comment, { foreignKey: 'userId', as: 'comments' })
     }
   }
 
