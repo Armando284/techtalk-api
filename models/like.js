@@ -36,4 +36,6 @@ module.exports = (sequelize) => {
     timestamps: true,
     initialAutoIncrement: 1
   })
+
+  return Like
 }
