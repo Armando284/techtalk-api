@@ -6,6 +6,9 @@ const logger = require('morgan');
 const indexRouter = require('./routes/index');
 const healthRouter = require('./routes/health');
 const usersRouter = require('./routes/users');
+const postRouter = require('./routes/posts')
+const commentRouter = require('./routes/comments')
+const likeRouter = require('./routes/likes')
 
 const app = express();
 
@@ -18,5 +21,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/health', healthRouter);
+app.use('/posts', postRouter)
+app.use('/comments', commentRouter)
+app.use('/likes', likeRouter)
 
 module.exports = app;
