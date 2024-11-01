@@ -11,6 +11,7 @@ module.exports = (sequelize) => {
     static associate(models) {
       this.hasMany(models.Post, { foreignKey: 'userId', as: 'posts' })
       this.hasMany(models.Comment, { foreignKey: 'userId', as: 'comments' })
+      this.hasMany(models.Like, { foreignKey: 'userId', as: 'likes' })
     }
   }
 
@@ -32,12 +33,14 @@ module.exports = (sequelize) => {
     password: {
       type: DataTypes.STRING,
       allowNull: false
-    }
+    },
+
   }, {
     sequelize,
     modelName: 'User',
     tableName: 'Users',
-    timestamps: true
+    timestamps: true,
+    initialAutoIncrement: 1
   })
 
   User.beforeCreate(async (user) => {
