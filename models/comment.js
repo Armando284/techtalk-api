@@ -18,7 +18,7 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'users',
+        model: 'Users',
         key: 'id',
       }
     },
@@ -26,7 +26,7 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'posts',
+        model: 'Posts',
         key: 'id'
       }
     },
@@ -38,7 +38,8 @@ module.exports = (sequelize) => {
     sequelize,
     modelName: 'Comment',
     tableName: 'Comments',
-    timestamps: true
+    timestamps: true,
+    initialAutoIncrement: 1
   })
 
   return Comment

@@ -1,26 +1,17 @@
 const { Model, DataTypes } = require('sequelize')
 
 module.exports = (sequelize) => {
-  class Post extends Model {
+  class Like extends Model {
     static associate(models) {
       this.belongsTo(models.User, { foreignKey: 'userId', as: 'user' })
-      this.hasMany(models.Comment, { foreignKey: 'postId', as: 'posts' })
     }
   }
 
-  Post.init({
+  Like.init({
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true
-    },
-    title: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    content: {
-      type: DataTypes.TEXT,
-      allowNull: false
     },
     userId: {
       type: DataTypes.INTEGER,
@@ -29,14 +20,20 @@ module.exports = (sequelize) => {
         model: 'Users',
         key: 'id'
       }
+    },
+    likeable_type: { // post || comment
+      type: DataTypes.STRING(50),
+      allowNull: false
+    },
+    likeable_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     }
   }, {
     sequelize,
-    modelName: 'Post',
-    tableName: 'Posts',
+    modelName: 'Like',
+    tableName: 'Likes',
     timestamps: true,
     initialAutoIncrement: 1
   })
-
-  return Post
 }
