@@ -11,12 +11,12 @@ module.exports = {
      */
 
     const { DataTypes } = Sequelize
-    await queryInterface.createTable('Comments', {
+    await queryInterface.createTable('Likes', {
       id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
-        allowNull: false,
+        allowNull: false
       },
       userId: {
         type: DataTypes.INTEGER,
@@ -28,30 +28,24 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       },
-      postId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-          model: 'Posts',
-          key: 'id'
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
+      likeable_type: {
+        type: DataTypes.STRING(50),
+        allowNull: false
       },
-      content: {
-        type: DataTypes.TEXT,
+      likeable_id: {
+        type: DataTypes.INTEGER,
         allowNull: false
       },
       createdAt: {
         type: DataTypes.DATE,
         allowNull: false,
-        defaultValue: DataTypes.NOW,
+        defaultValue: DataTypes.NOW
       },
       updatedAt: {
         type: DataTypes.DATE,
         allowNull: false,
-        defaultValue: DataTypes.NOW,
-      },
+        defaultValue: DataTypes.NOW
+      }
     })
   },
 
@@ -62,6 +56,7 @@ module.exports = {
      * Example:
      * await queryInterface.dropTable('users');
      */
-    await queryInterface.dropTable('Comments')
+
+    return queryInterface.dropTable('Likes')
   }
 };

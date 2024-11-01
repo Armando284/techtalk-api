@@ -10,7 +10,6 @@ module.exports = {
      * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
      */
     const { DataTypes } = Sequelize
-    await this.down(queryInterface, Sequelize);
     await queryInterface.createTable('Posts', {
       id: {
         type: DataTypes.INTEGER,
