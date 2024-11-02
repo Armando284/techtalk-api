@@ -1,0 +1,14 @@
+### Health route checks server and DB connection
+http://localhost:3000/health
+
+### List all users
+http://localhost:3000/users
+
+### List all posts
+http://localhost:3000/posts
+
+### List all comments
+http://localhost:3000/comments
+
+### List all likes
+http://localhost:3000/likes
