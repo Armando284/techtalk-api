@@ -4,8 +4,8 @@ const saltRounds = 10
 
 module.exports = (sequelize) => {
   class User extends Model {
-    async isValidPassword(password) {
-      return await bcrypt.compare(password, this.password)
+    static async isPassword({ user, password }) {
+      return await bcrypt.compare(password, user.password)
     }
 
     static associate(models) {
@@ -23,16 +23,31 @@ module.exports = (sequelize) => {
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+        isAlphanumeric: true,
+        len: [3, 16],
+      }
     },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true
+      unique: true,
+      validate: {
+        notEmpty: true,
+        isEmail: true,
+        len: [3, 64],
+      }
     },
     password: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+        isAlphanumeric: true,
+        len: [6, 64],
+      }
     },
 
   }, {
