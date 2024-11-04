@@ -1,14 +1,45 @@
 ### Health route checks server and DB connection
-http://localhost:3000/health
+GET http://localhost:3000/health
+
+
+### USERS
 
 ### List all users
-http://localhost:3000/users
+GET http://localhost:3000/users
+
+### Create User
+POST http://localhost:3000/users/
+Content-Type: application/json
+
+{
+  "username": "Ender",
+  "email": "ender@example.com",
+  "password": "hashedpassword123"
+}
+
+### Login User
+POST http://localhost:3000/users/login
+Content-Type: application/json
+
+{
+  "username": "Ender",
+  "password": "hashedpassword123"
+}
+
+### Delete User
+DELETE http://localhost:3000/users/
+
+### POSTS
 
 ### List all posts
-http://localhost:3000/posts
+GET http://localhost:3000/posts
+
+### COMMENTS
 
 ### List all comments
-http://localhost:3000/comments
+GET http://localhost:3000/comments
+
+### LIKES
 
 ### List all likes
-http://localhost:3000/likes
+GET http://localhost:3000/likes

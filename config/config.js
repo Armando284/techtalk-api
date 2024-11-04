@@ -23,5 +23,6 @@ module.exports = {
     host: process.env.DB_HOST,
     dialect: 'postgres',
     logging: false, // Deactivate logging on production
-  }
+  },
+  jwtSecretKey: process.env.JWT_SECRET_KEY,
 };
