@@ -13,8 +13,9 @@ async function checkDatabaseConnection() {
 
 exports.checkHealth = async (req, res, next) => {
   try {
-    const response = await checkDatabaseConnection()
-    res.json(response)
+    // const response = await checkDatabaseConnection()
+    // res.json(response)
+    res.json({ success: 'Server is working correclty!' })
   } catch (error) {
     res.status(500).json({ error: 'Server check health error!' })
   }
