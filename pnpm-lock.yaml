@@ -35,6 +35,9 @@ dependencies:
   sequelize:
     specifier: 6.37.4
     version: 6.37.4(pg-hstore@2.3.4)(pg@8.13.1)
+  serverless-http:
+    specifier: 3.2.0
+    version: 3.2.0
 
 devDependencies:
   sequelize-cli:
@@ -1119,6 +1122,11 @@ packages:
       send: 0.16.1
     transitivePeerDependencies:
       - supports-color
+    dev: false
+
+  /serverless-http@3.2.0:
+    resolution: {integrity: sha512-QvSyZXljRLIGqwcJ4xsKJXwkZnAVkse1OajepxfjkBXV0BMvRS5R546Z4kCBI8IygDzkQY0foNPC/rnipaE9pQ==}
+    engines: {node: '>=12.0'}
     dev: false
 
   /setprototypeof@1.0.3:
