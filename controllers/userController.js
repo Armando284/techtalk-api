@@ -13,9 +13,9 @@ exports.getAllUsers = async (req, res) => {
 }
 
 exports.createUser = async (req, res) => {
-  const { username: name, email, password } = req.body
+  const { name, email, password } = req.body
   try {
-    Validation.username(name)
+    Validation.name(name)
     Validation.email(email)
     Validation.password(password)
 
@@ -36,10 +36,10 @@ exports.createUser = async (req, res) => {
 }
 
 exports.loginUser = async (req, res) => {
-  const { username: name, password } = req.body
+  const { name, password } = req.body
 
   try {
-    Validation.username(name)
+    Validation.name(name)
     Validation.password(password)
 
     const user = await User.findOne({ where: { name } })
@@ -49,7 +49,7 @@ exports.loginUser = async (req, res) => {
     if (!isPassword) throw new Error('Wrong password!')
 
     const token = jwt.sign(
-      { id: user.id, username: user.name },
+      { id: user.id, name: user.name },
       config.jwtSecretKey,
       {
         expiresIn: '1h'
@@ -76,6 +76,38 @@ exports.loginUser = async (req, res) => {
 
 }
 
+exports.updateUser = async (req, res) => {
+  const token = req.cookies.access_tokken
+  const { name, email, password } = req.body
+  console.log({ name, email, password });
+
+
+  try {
+    if (token == null) {
+      throw new Error('Access not authorized!')
+    }
+    const data = jwt.verify(token, config.jwtSecretKey)
+    if (data?.id == null) {
+      throw new Error('Wrong access token format!')
+    }
+
+    const myUser = await User.findOne({ where: { id: data.id } }) // Make sure is the same user on the token, can this create issues 🤔
+    await myUser.update({ name, email, password })
+
+    const publicUser = {
+      id: myUser.id,
+      name: myUser.name,
+      email: myUser.email
+    }
+
+    res.json(publicUser)
+
+  } catch (error) {
+    console.error(error.message)
+    res.status(403).json({ error: error.message })
+  }
+}
+
 exports.deleteUser = async (req, res) => {
   const token = req.cookies.access_tokken
 
@@ -85,9 +117,10 @@ exports.deleteUser = async (req, res) => {
     }
     const data = jwt.verify(token, config.jwtSecretKey)
     if (data?.id == null) {
-      throw new Error('Wrong format access token!')
+      throw new Error('Wrong access token format!')
     }
     await User.destroy({ where: { id: data.id } })
+    res.clearCookie('access_token')
     res.json('User deleted!')
   } catch (error) {
     console.error(error.message)

@@ -45,7 +45,6 @@ module.exports = (sequelize) => {
       allowNull: false,
       validate: {
         notEmpty: true,
-        isAlphanumeric: true,
         len: [6, 64],
       }
     },

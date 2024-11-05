@@ -12,7 +12,7 @@ POST http://localhost:3000/users/
 Content-Type: application/json
 
 {
-  "username": "Ender",
+  "name": "Ender",
   "email": "ender@example.com",
   "password": "hashedpassword123"
 }
@@ -22,8 +22,17 @@ POST http://localhost:3000/users/login
 Content-Type: application/json
 
 {
-  "username": "Ender",
-  "password": "hashedpassword123"
+  "name": "Andrew",
+  "password": "hashedpassword1234"
+}
+
+### Update User
+PUT http://localhost:3000/users
+Content-Type: application/json
+
+{
+  "name": "Andrew",
+  "password": "hashedpassword1234"
 }
 
 ### Delete User

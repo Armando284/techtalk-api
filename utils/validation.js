@@ -12,7 +12,7 @@ module.exports = class Validation {
     if (trimed.length < min || trimed.length > max) throw new Error(`${tag} length must be larger than ${min} and smaller than ${max}!`)
   }
 
-  static username(_name) {
+  static name(_name) {
     const tag = 'User name'
     this.#isNull(_name, tag)
     this.#isString(_name, tag)
