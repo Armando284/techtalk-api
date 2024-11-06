@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
-    "dev": "node --trace-warnings --watch ./bin/www"
+    "start": "node ./api",
+    "dev": "node --trace-warnings --watch ./api"
   },
   "dependencies": {
     "bcryptjs": "2.4.3",
