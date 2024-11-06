@@ -1,7 +1,11 @@
-require('dotenv').config()
+const { config } = require('dotenv')
 const app = require('../app');
 const debug = require('debug')('techtalk-api:server');
 const http = require('http');
+
+if (process.env.NODE_ENV !== "production") {
+  config();
+}
 
 const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
