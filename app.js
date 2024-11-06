@@ -2,9 +2,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-require('dotenv').config()
-
-const port = process.env.PORT || 3000;
+const api = require('./api')
 
 const indexRouter = require('./routes/index');
 const healthRouter = require('./routes/health');
@@ -27,7 +25,6 @@ app.use('/health', healthRouter);
 app.use('/posts', postRouter)
 app.use('/comments', commentRouter)
 app.use('/likes', likeRouter)
-
-app.listen(port);
+app.use('/api/v1', api)
 
 module.exports = app;
