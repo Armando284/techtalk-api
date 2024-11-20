@@ -2,9 +2,10 @@
   "name": "techtalk-api",
   "version": "0.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "start": "node ./api",
-    "dev": "node --trace-warnings --watch ./api"
+    "start": "node ./src/app.js",
+    "dev": "node --trace-warnings --watch ./src/app.js"
   },
   "dependencies": {
     "bcryptjs": "2.4.3",
