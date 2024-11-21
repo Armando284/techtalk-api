@@ -2,6 +2,7 @@ const { config } = require('dotenv')
 const app = require('../app');
 const debug = require('debug')('techtalk-api:server');
 const http = require('http');
+const { sequelize } = require('../models')
 
 if (process.env.NODE_ENV !== "production") {
   config();
@@ -15,6 +16,7 @@ const server = http.createServer(app);
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
+runMigrations()
 
 function normalizePort(val) {
   const port = parseInt(val, 10);
@@ -53,6 +55,16 @@ function onError(error) {
       break;
     default:
       throw error;
+  }
+}
+
+async function runMigrations() {
+  try {
+    console.log('Running migrations...');
+    await sequelize.sync(); // O usa `sequelize.sync({ force: true })` si quieres sobrescribir tablas
+    console.log('Migrations complete!');
+  } catch (error) {
+    console.error('Error running migrations:', error);
   }
 }
 
